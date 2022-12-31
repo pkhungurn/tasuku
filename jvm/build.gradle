@@ -1,0 +1,39 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.1'
+        classpath "gradle.plugin.com.github.johnrengelman:shadow:7.1.0"
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+
+    String gdxVersion = "1.9.8"
+    String lwjglVersion = "3.3.1"
+    String imageIoVersion = "3.8.2"
+
+    project.ext {
+        MAVEN = [
+                COMMONS_IO                  : 'commons-io:commons-io:2.11.0',
+                COMMONS_CLI                 : 'commons-cli:commons-cli:1.5.0',
+                COMMONS_LANG3               : 'org.apache.commons:commons-lang3:3.12.0',
+                COMMONS_EXEC                : 'org.apache.commons:commons-exec:1.3',
+                GUAVA                       : 'com.google.guava:guava:31.1-jre',
+                SLF4J_API                   : 'org.slf4j:slf4j-api:1.7.36',
+                LOGBACK_CORE                : 'ch.qos.logback:logback-core:1.2.11',
+                LOGBACK_CLASSIC             : 'ch.qos.logback:logback-classic:1.2.11',
+                TABLE_LAYOUT                : 'tablelayout:TableLayout:20050920',                
+        ]
+    }
+}
