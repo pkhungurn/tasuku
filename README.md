@@ -1,6 +1,6 @@
 # tasuku
 
-A task execution system implemented in a few languages. Think of it as a tool similar to [GNU Make](https://www.gnu.org/software/make/) but you have to implement the command line interface yourself.
+`tasuku` （タスク） is a task execution system implemented in a few languages. Think of it as a tool similar to [GNU Make](https://www.gnu.org/software/make/) but you have to implement the command line interface yourself.
 
 ## What does it do?
 
@@ -54,4 +54,4 @@ I created `tasuku` instead of using other build tools such as Make, [Rake](https
 
 ## Release History
 
-* \[2023/01/01\] First release
+* \[2023/01/01\] First release.
