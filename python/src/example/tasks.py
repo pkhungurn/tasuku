@@ -1,8 +1,7 @@
 import os
 import random
 
-from pytasuku import Workspace
-from pytasuku.workspace import file_task, command_task
+from pytasuku import Workspace, file_task, command_task
 
 
 def define_tasks(workspace: Workspace):

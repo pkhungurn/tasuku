@@ -50,7 +50,19 @@ python src/example/run.py data/delete_all
 
 ## Usage Guide
 
-TODO
+### Step 1: Create a Workspace
+
+A **workspace** is an object that keeps track of tasks and their dependencies. It allows you to execute tasks in the correct topological order. Before you can define any tasks, you need to create an instance of the `Workspace` class.
+
+```python
+from pytasuku import Workspace
+
+workspace = Workspace()
+```
+
+### Step 2: Define Tasks
+
+A **task** is just a Python function that has no arguments and returns nothing.
 
 ## Organzing the Tasks
 
