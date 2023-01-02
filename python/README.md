@@ -64,6 +64,86 @@ workspace = Workspace()
 
 A **task** is just a Python function that has no arguments and returns nothing.
 
-## Organzing the Tasks
+#### Command Tasks
 
-TODO
+A command task can be defined by annotating a function with the `@command_task` annotation. The annotation takes three arguments, in order.
+
+1. A workspace that is going to hold the task.
+1. The task name.
+1. A list of names of the task's dependencies.
+
+Below, we create two tasks. The second depends on the first.
+
+```python
+from pytasuku import command_task
+
+@command_task(workspace, 'task_0', [])
+def run_task_0():
+  print("Running task_0")
+
+
+@command_task(workspace, 'task_1', ['task_0'])
+def run_task_1():
+  print("Running task_1")
+```
+
+#### File Tasks
+
+Similarly, a file task can be created using the `@file_task` annotation, and it takes in the same argument as the `@command_task` annotation. One thing to keep in mind is that you are responsible for making sure that the task you define actually the file that is the name of the task. It won't work otherwise.
+
+```python
+from pytasuku import file_task
+
+@file_task(workspace, 'a.txt', [])
+def create_a_txt():
+  with open('a.txt', 'wt') as fout:
+    fout.write("AAA")
+
+
+@file_task(workspace, 'b.txt', ['a.txt'])
+def create_b_txt():
+  with open('b.txt', 'wt') as fout:
+    fout.write("BBB")
+
+
+@command_task(workspace, 'create_files', ['a.txt', 'b.txt'])
+def create_files():
+  pass
+```
+
+In the above listing, we create two file tasks, `a.txt` and `b.txt`, where the second depends on the first. Note that the functions for these tasks actually write new files whose names are the task names. ***IT IS THE RESPONSIBILITY OF YOU, THE USER, TO DO THIS.*** Lastly, we created a command task that depends on the file tasks. The command task itself does not do anything. However, since it depends on the two file tasks, the system will check whether the files exists and are updated every time you invoke the command task. If not, the files will be created.
+
+### Step 3: Run Task(s) in a Session
+
+To run a task, you need to start a **session**. It is a time period dedicated to running tasks. When you start a session, the system will build a dependency graph of the task, freeze it, and checks whether the graph is well-formed or not. If not, the system will complain and throw an exception. If not you, can run tasks by calling the `run` method of the `Workspace` class.
+
+The `Workspace` class has the `start_session` and `end_session` methods that do what their name say. So, the following snippet to run the `create_files` task we just defined.
+
+```python
+workspace.start_session()
+workspace.run("create_files")
+workspace.end_session()
+```
+
+However, there's also the `session` method that can be used with Python's `with` clause. This method is a context manager that starts a session when you enter the method and ends it when you leave.
+
+```python
+with workspace.session():
+  workspace.run("create_files")
+```
+
+After a session ends, you can start creating tasks again.
+
+### Step 4 (Optional): Use the Task Selector UI
+
+If you do not want to specify a task's name programmatically, you can run a task selector UI that allows you to pick a task, and the UI will take care of creating a session and running it. Invoking the UI is very simple, just give the workspace (after you have created all the tasks) to the `run_task_selector_ui` function.
+
+```python
+from pytasuku.task_selector_ui import run_task_selector_ui
+
+run_task_selector_ui(workspace)
+```
+
+
+## Organzing You Code
+

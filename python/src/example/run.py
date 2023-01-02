@@ -22,8 +22,7 @@ if __name__ == "__main__":
     workspace = Workspace()
     tasks.define_tasks(workspace)
 
-    workspace.start_session()
-    for arg in sys.argv[1:]:
-        arg = replace_sep_with_slash(arg)
-        workspace.run(arg)
-    workspace.end_session()
+    with workspace.session():
+        for arg in sys.argv[1:]:
+            arg = replace_sep_with_slash(arg)
+            workspace.run(arg)

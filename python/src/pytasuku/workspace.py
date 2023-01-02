@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 from enum import Enum
 from typing import List
 
@@ -91,6 +92,14 @@ class Workspace:
             raise RuntimeError("A session can only be ended when the workspace is in session.")
         self._state = WorkspaceState.OUT_OF_SESSION
         self._name_to_done = None
+
+    @contextmanager
+    def session(self):
+        try:
+            self.start_session()
+            yield
+        finally:
+            self.end_session()
 
     def check_cycle(self):
         node_states = dict()

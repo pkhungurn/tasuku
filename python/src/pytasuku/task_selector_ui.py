@@ -100,6 +100,5 @@ def run_task_selector_ui(workspace: Workspace):
     task_name = task_selector_ui.selected_task_name
     if task_name is not None:
         print("Running", task_name, "...")
-        workspace.start_session()
-        workspace.run(task_name)
-        workspace.end_session()
+        with workspace.session():
+            workspace.run(task_name)
