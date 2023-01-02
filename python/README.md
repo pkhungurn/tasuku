@@ -144,6 +144,10 @@ from pytasuku.task_selector_ui import run_task_selector_ui
 run_task_selector_ui(workspace)
 ```
 
+## Code Organization
 
-## Organzing You Code
+The `src/example` directory contains an example of how I usually organize my project. It has three main files.
 
+* `src/example/tasks.py` is responsible for defining the tasks, which is done in the `define_tasks` function that takes a `Workspace` as an argument.
+* `src/example/run.py` is the command line interface of the system. 
+* `src/example/run_ui.py` runs the task selector UI.
