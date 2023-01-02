@@ -1,3 +1,5 @@
 rootProject.name = "jvm_tasuku"
 
 include(":tasuku")
+
+include(":example")

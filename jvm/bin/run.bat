@@ -1,0 +1,1 @@
+java -Dfile.encoding=UTF-8 -Xmx32768m -classpath "example/build/libs/*" %*
