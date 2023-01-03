@@ -66,7 +66,7 @@ A **task** is just a Python function that has no arguments and returns nothing.
 
 #### Command Tasks
 
-A command task can be defined by annotating a function with the `@command_task` annotation. The annotation takes three arguments, in order.
+A command task can be defined by decorating a function with the `@command_task` decorator. The decorator takes three arguments, in order.
 
 1. A workspace that is going to hold the task.
 1. The task name.
@@ -89,7 +89,7 @@ def run_task_1():
 
 #### File Tasks
 
-Similarly, a file task can be created using the `@file_task` annotation, and it takes in the same argument as the `@command_task` annotation. One thing to keep in mind is that you are responsible for making sure that the task you define actually the file that is the name of the task. It won't work otherwise.
+Similarly, a file task can be created using the `@file_task` decorator, and it takes in the same argument as the `@command_task` decorator. One thing to keep in mind is that you are responsible for making sure that the task you define actually the file that is the name of the task. It won't work otherwise.
 
 ```python
 from pytasuku import file_task
